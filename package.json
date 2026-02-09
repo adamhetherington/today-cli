@@ -1,6 +1,6 @@
 {
   "name": "@hether/today-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A minimal CLI for capturing what actually happened today (notes, decisions, progress) without becoming a task manager.",
   "type": "commonjs",
   "main": "dist/cli.js",
