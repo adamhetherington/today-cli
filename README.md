@@ -1,5 +1,7 @@
 # today
 
+![today-cli](assets/today-cli-icon.png)
+
 A minimal CLI for capturing **what actually happened today** - notes, decisions, progress, blockers-without becoming a task manager. One Markdown file per day, timestamped entries, no tasks, no due dates, no status.
 
 ## Philosophy
