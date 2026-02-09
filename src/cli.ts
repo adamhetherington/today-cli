@@ -9,6 +9,31 @@ const { exitWithError } = require("./utils/errors.js");
 
 const pkg = require("../package.json");
 
+// Catch common mistake: -note instead of note (and similar)
+const hyphenCommands: Record<string, string> = {
+  "-note": "note",
+  "-decision": "decision",
+  "-progress": "progress",
+  "-blocker": "blocker",
+};
+const arg2 = process.argv[2];
+if (arg2 && hyphenCommands[arg2]) {
+  console.error(
+    `Unknown option '${arg2}'. Did you mean the '${hyphenCommands[arg2]}' command?`
+  );
+  console.error(`Usage: today ${hyphenCommands[arg2]} "<text>"`);
+  process.exit(1);
+}
+
+// When no subcommand is given, run "open" (so `today` and `today -d YYYY-MM-DD` work)
+const knownCommands = ["open", "note", "decision", "progress", "blocker", "summary", "raw"];
+if (
+  process.argv.length === 2 ||
+  (arg2 && !knownCommands.includes(arg2) && arg2.startsWith("-"))
+) {
+  process.argv.splice(2, 0, "open");
+}
+
 const program = new Command();
 
 program
@@ -21,8 +46,8 @@ program
   .option("--editor <command>", "Editor to open (overrides VISUAL/EDITOR)");
 
 program
-  .command("open", { isDefault: true })
-  .description("Open today's file in your editor (default command)")
+  .command("open")
+  .description("Open today's file in your editor (default when no command given)")
   .action(async () => {
     try {
       const opts = program.opts();

@@ -26,7 +26,9 @@ For local development: `npm link` from the repo root so the `today` binary is av
 | `today summary` | Print a clean summary for the day |
 | `today raw` | Print the full path to the day’s file |
 
-**Global options** (all commands):
+Use the **subcommand** name without a hyphen (e.g. `today note "..."`, not `today -note "..."`).
+
+**Global options** (one hyphen, for flags only):
 
 - `-d, --date YYYY-MM-DD` — Use this date instead of today
 - `--editor <command>` — Editor to open (overrides `VISUAL` / `EDITOR`)
